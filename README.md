@@ -72,7 +72,7 @@ The reason the above code will fail to compile is because `Identifiable` require
 
 Since Identity is implemented within a single file, the easiest way to use it is to simply drag and drop it into your Xcode project.
 
-But if you wish to use a dependency manager, you can either use the [Swift Package Manager](https://github.com/apple/swift-package-manager) by declaring Identity as a dependency in your `Package.swift` file:
+But if you wish to use a dependency manager, you can use the [Swift Package Manager](https://github.com/apple/swift-package-manager) by declaring Identity as a dependency in your `Package.swift` file:
 
 ```swift
 .package(url: "https://github.com/JohnSundell/Identity", from: "0.1.0")
