@@ -6,7 +6,7 @@ For more information, check out *["Type-safe identifiers in Swift"](https://www.
 
 ## Making types identifiable
 
-All you have to do to use Identity is to make a model conform to `Identifiable`, and giving it an `id` property, like this:
+All you have to do to use Identity is to make a model conform to `Identifiable`, and give it an `id` property, like this:
 
 ```swift
 struct User: Identifiable {
@@ -15,9 +15,11 @@ struct User: Identifiable {
 }
 ```
 
+And just like that, the above `User` identifier is now type-safe!
+
 ## Customizing the raw type
 
-`Identifier` values are backed by strings by default, but that can be easily customized by giving an `Identifiable` type a `RawIdentifier`:
+`Identifier` values are backed by strings by default, but that can easily be customized by giving an `Identifiable` type a `RawIdentifier`:
 
 ```swift
 struct Article: Identifiable {
@@ -28,15 +30,17 @@ struct Article: Identifiable {
 }
 ```
 
+The above `Article` identifier is now backed by a `UUID` instead of a `String`.
+
 ## Conveniences built-in
 
-Identity makes identifiers more type-safe, while still offering several conveniences to help reduce verbosity. For example, if an `Identifier` is backed by a raw value type that can be expressed by a `String` literal, so can the identifier:
+Even though Identity is focused on type safety, it still offers several conveniences to help reduce verbosity. For example, if an `Identifier` is backed by a raw value type that can be expressed by a `String` literal, so can the identifier:
 
 ```swift
 let user = User(id: "johnsundell", name: "John Sundell")
 ```
 
-The same is also true for identifiers that are backend by raw value type that can be expressed by `Int` literals:
+The same is also true for identifiers that are backend by a raw value type that can be expressed by `Int` literals:
 
 ```swift
 let tag = Tag(id: 7, name: "swift")
@@ -46,13 +50,13 @@ let tag = Tag(id: 7, name: "swift")
 
 ## Type safety
 
-So how exactly does Identity make identifiers more type-safe? First, when using Identity, it no longer becomes possible to accidentally pass an identifier for one type to an API that accepts an identifier for another type. For example, this code won't compile:
+So how exactly does Identity make identifiers more type-safe? First, when using Identity, it no longer becomes possible to accidentally pass an identifier for one type to an API that accepts an identifier for another type. For example, this code won't compile when using Identity:
 
 ```swift
 articleManager.article(withID: user.id)
 ```
 
-The compiler will give us an error above, since we're trying to pass an `Identifier<User>` value to a method that accepts an `Identifier<Article>`, giving us much stronger type safety.
+The compiler will give us an error above, since we're trying to pass an `Identifier<User>` value to a method that accepts an `Identifier<Article>` - giving us much stronger type safety than when using plain values, like `String` or `Int`, as identifiers.
 
 Identity also makes it impossible to accidentially declare `id` properties of the wrong type. So the following won't compile either:
 
@@ -66,21 +70,15 @@ The reason the above code will fail to compile is because `Identifiable` require
 
 ## Installation
 
-Since **Codextended** is implemented within a single file, the easiest way to use it is to simply drag and drop it into your Xcode project.
+Since Identity is implemented within a single file, the easiest way to use it is to simply drag and drop it into your Xcode project.
 
-But if you wish to use a dependency manager, you can either use the [Swift Package Manager](https://github.com/apple/swift-package-manager) by declaring **Codextended** as a dependency in your `Package.swift` file:
+But if you wish to use a dependency manager, you can either use the [Swift Package Manager](https://github.com/apple/swift-package-manager) by declaring Identity as a dependency in your `Package.swift` file:
 
 ```swift
-.package(url: "https://github.com/JohnSundell/Codextended", from: "0.1.0")
+.package(url: "https://github.com/JohnSundell/Identity", from: "0.1.0")
 ```
 
 *For more information, see [the Swift Package Manager documentation](https://github.com/apple/swift-package-manager/tree/master/Documentation).*
-
-You can also use [CocoaPods](https://cocoapods.org) by adding the following line to your `Podfile`:
-
-```ruby
-pod "Codextended"
-```
 
 ## Contributions & support
 
