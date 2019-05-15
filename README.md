@@ -15,7 +15,16 @@ struct User: Identifiable {
 }
 ```
 
-And just like that, the above `User` identifier is now type-safe!
+And just like that, the above `User` identifier is now type-safe! Thanks to Swift’s type inference capabilities, it’s also possible to implement an `Identifiable` type’s `id` simply by using `ID` as its type:
+
+```swift
+struct User: Identifiable {
+    let id: ID
+    let name: String
+}
+```
+
+The `ID` type alias is automatically added for all `Identifiable` types, which also makes it possible to refer to `Identifier<User>` as `User.ID`.
 
 ## Customizing the raw type
 
@@ -25,7 +34,7 @@ And just like that, the above `User` identifier is now type-safe!
 struct Article: Identifiable {
     typealias RawIdentifier = UUID
 
-    let id: Identifier<Article>
+    let id: ID
     let title: String
 }
 ```
@@ -58,7 +67,7 @@ articleManager.article(withID: user.id)
 
 The compiler will give us an error above, since we're trying to pass an `Identifier<User>` value to a method that accepts an `Identifier<Article>` - giving us much stronger type safety than when using plain values, like `String` or `Int`, as identifiers.
 
-Identity also makes it impossible to accidentially declare `id` properties of the wrong type. So the following won't compile either:
+Identity also makes it impossible to accidentally declare `id` properties of the wrong type. So the following won't compile either:
 
 ```swift
 struct User: Identifiable {

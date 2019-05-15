@@ -10,7 +10,7 @@ import Identity
 final class IdentityTests: XCTestCase {
     func testStringBasedIdentifier() {
         struct Model: Identifiable {
-            let id: Identifier<Model>
+            let id: ID
         }
 
         let model = Model(id: "Hello, world!")
@@ -20,7 +20,7 @@ final class IdentityTests: XCTestCase {
     func testIntBasedIdentifier() {
         struct Model: Identifiable {
             typealias RawIdentifier = Int
-            let id: Identifier<Model>
+            let id: ID
         }
 
         let model = Model(id: 7)
@@ -30,7 +30,7 @@ final class IdentityTests: XCTestCase {
     func testCodableIdentifier() throws {
         struct Model: Identifiable, Codable {
             typealias RawIdentifier = UUID
-            let id: Identifier<Model>
+            let id: ID
         }
 
         let model = Model(id: Identifier(rawValue: UUID()))
@@ -41,7 +41,7 @@ final class IdentityTests: XCTestCase {
 
     func testIdentifierEncodedAsSingleValue() throws {
         struct Model: Identifiable, Codable {
-            let id: Identifier<Model>
+            let id: ID
         }
 
         let model = Model(id: "I'm an ID")
