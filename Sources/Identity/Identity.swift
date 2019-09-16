@@ -69,6 +69,14 @@ extension Identifier: ExpressibleByStringInterpolation
           where Value.RawIdentifier: ExpressibleByStringInterpolation,
                 Value.RawIdentifier.StringLiteralType == String {}
 
+// MARK: - String conversion support
+
+extension Identifier: CustomStringConvertible {
+    public var description: String {
+        return "\(rawValue)"
+    }
+}
+
 // MARK: - Compiler-generated protocol support
 
 extension Identifier: Equatable where Value.RawIdentifier: Equatable {}
