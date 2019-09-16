@@ -65,6 +65,10 @@ extension Identifier: ExpressibleByStringLiteral
     }
 }
 
+extension Identifier: ExpressibleByStringInterpolation
+          where Value.RawIdentifier: ExpressibleByStringInterpolation,
+                Value.RawIdentifier.StringLiteralType == String {}
+
 // MARK: - Compiler-generated protocol support
 
 extension Identifier: Equatable where Value.RawIdentifier: Equatable {}

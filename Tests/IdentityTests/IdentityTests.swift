@@ -50,6 +50,15 @@ final class IdentityTests: XCTestCase {
         XCTAssertEqual(json?["id"] as? String, "I'm an ID")
     }
 
+    func testExpressingIdentifierUsingStringInterpolation() {
+        struct Model: Identifiable {
+            let id: ID
+        }
+
+        let model = Model(id: "Hello, world!")
+        XCTAssertEqual(model.id, "Hello, \("world!")")
+    }
+
     func testAllTestsRunOnLinux() {
         verifyAllTestsRunOnLinux()
     }
@@ -60,6 +69,7 @@ extension IdentityTests: LinuxTestable {
         ("testStringBasedIdentifier", testStringBasedIdentifier),
         ("testIntBasedIdentifier", testIntBasedIdentifier),
         ("testCodableIdentifier", testCodableIdentifier),
-        ("testIdentifierEncodedAsSingleValue", testIdentifierEncodedAsSingleValue)
+        ("testIdentifierEncodedAsSingleValue", testIdentifierEncodedAsSingleValue),
+        ("testExpressingIdentifierUsingStringInterpolation", testExpressingIdentifierUsingStringInterpolation)
     ]
 }
