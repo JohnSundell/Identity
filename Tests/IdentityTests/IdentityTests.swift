@@ -76,6 +76,21 @@ final class IdentityTests: XCTestCase {
         XCTAssertEqual(intID.description, "7")
     }
 
+    func testIdentifierHashValue() {
+        struct FirstModel: Identifiable {
+            let id: ID
+        }
+
+        struct SecondModel: Identifiable {
+            let id: ID
+        }
+
+        let first = FirstModel(id: "0")
+        let second = SecondModel(id: "0")
+
+        XCTAssertNotEqual(first.id.hashValue, second.id.hashValue)
+    }
+
     func testAllTestsRunOnLinux() {
         verifyAllTestsRunOnLinux()
     }
@@ -88,6 +103,7 @@ extension IdentityTests: LinuxTestable {
         ("testCodableIdentifier", testCodableIdentifier),
         ("testIdentifierEncodedAsSingleValue", testIdentifierEncodedAsSingleValue),
         ("testExpressingIdentifierUsingStringInterpolation", testExpressingIdentifierUsingStringInterpolation),
-        ("testIdentifierDescription", testIdentifierDescription)
+        ("testIdentifierDescription", testIdentifierDescription),
+        ("testIdentifierHashValue", testIdentifierHashValue),
     ]
 }
