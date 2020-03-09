@@ -77,10 +77,18 @@ extension Identifier: CustomStringConvertible {
     }
 }
 
+// MARK: - Hashable support
+
+extension Identifier: Hashable where Value.RawIdentifier: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(ObjectIdentifier(Value.self))
+        hasher.combine(rawValue)
+    }
+}
+
 // MARK: - Compiler-generated protocol support
 
 extension Identifier: Equatable where Value.RawIdentifier: Equatable {}
-extension Identifier: Hashable where Value.RawIdentifier: Hashable {}
 
 // MARK: - Codable support
 
