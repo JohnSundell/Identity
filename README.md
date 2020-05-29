@@ -89,6 +89,11 @@ But if you wish to use a dependency manager, you can use the [Swift Package Mana
 
 *For more information, see [the Swift Package Manager documentation](https://github.com/apple/swift-package-manager/tree/master/Documentation).*
 
+You can also use [CocoaPods](https://cocoapods.org) by adding the following line to your `Podfile`:
+
+```ruby
+pod "Identity"
+```
 ## Contributions & support
 
 Identity is developed completely in the open, and your contributions are more than welcome.
