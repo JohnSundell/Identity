@@ -23,7 +23,7 @@ public protocol Identifiable {
 /// A type-safe identifier for a given `Value`, backed by a raw value.
 /// When backed by a `Codable` type, `Identifier` also becomes codable,
 /// and will be encoded into a single value according to its raw value.
-public struct Identifier<Value: Identifiable> {
+public struct Identifier<Value: Identifiable>: RawRepresentable {
     /// The raw value that is backing this identifier.
     public let rawValue: Value.RawIdentifier
 
