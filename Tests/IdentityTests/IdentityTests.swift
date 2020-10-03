@@ -50,6 +50,17 @@ final class IdentityTests: XCTestCase {
         XCTAssertEqual(json?["id"] as? String, "I'm an ID")
     }
 
+    func testComparableIdentifier() throws {
+        struct Model: Identifiable {
+            typealias RawIdentifier = Int
+            let id: ID
+        }
+
+        let smaller = Model(id: 1)
+        let larger = Model(id: 2)
+        XCTAssertLessThan(smaller.id, larger.id)
+    }
+
     func testExpressingIdentifierUsingStringInterpolation() {
         struct Model: Identifiable {
             let id: ID
