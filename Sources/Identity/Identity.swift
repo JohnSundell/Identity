@@ -95,3 +95,11 @@ extension Identifier: Codable where Value.RawIdentifier: Codable {
         try container.encode(rawValue)
     }
 }
+
+// MARK: - Comparable support
+
+extension Identifier: Comparable where Value.RawIdentifier: Comparable {
+    public static func < (lhs: Identifier<Value>, rhs: Identifier<Value>) -> Bool {
+        return lhs.rawValue < rhs.rawValue
+    }
+}
